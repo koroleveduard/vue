@@ -23,7 +23,6 @@
 
 <script>
 import axios from 'axios';
-import FormData from 'form-data';
 
 export default {
   name: 'Login',
@@ -51,7 +50,6 @@ export default {
           const token = responce.data.success.token;
           localStorage.setItem('token', token)
           this.$router.push('/')
-          console.log(responce.data.success.token)
       })
       .catch(e => {
           this.$router.push('/login')

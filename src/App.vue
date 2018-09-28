@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <div class="main-container">
       <center>
         <router-view/>
@@ -11,8 +10,23 @@
 </template>
 
 <script>
+import apiCall from './utils/api'
+
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    apiCall.interceptors.response.use(undefined, function (err) {
+    return new Promise(function (resolve, reject) {
+      //console.log(err.request)
+      console.log(err.response)
+      if (err.response.status === 401) {
+        localStorage.removeItem('token')
+        this.$router.push('/login')
+      }
+      throw err;
+    });
+    });
+  }
 }
 </script>
 

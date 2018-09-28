@@ -5,13 +5,19 @@
 </template>
 
 <script>
+import apiCall from '../utils/api'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Admin',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Панель администратора'
     }
+  },
+  mounted() {
+    apiCall
+      .post('api/details')
+      .then(response => (console.log(response)));
   }
 }
 </script>
